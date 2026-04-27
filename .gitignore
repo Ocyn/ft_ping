@@ -53,3 +53,6 @@ dkms.conf
 
 # debug information files
 *.dwo
+
+# executable and object files from the build process
+ft_ping
