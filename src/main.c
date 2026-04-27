@@ -11,6 +11,7 @@ int main(int ac, char **av)
 		);
 	char *target = av[1];
 	printf("PING %s XX(84) octets de données.\n", target);
-	printf("EH NAN JE DECONNE C\'EST PAS ENCORE FONCTIONNEL !!!\n\n");
+	printf("\n\n\nPtdrr je deconne c\'est pas encore fonctionnel c\'est du placeholder.\n\n");
+	printf("\n\n\n\n\n\n\n\nFils de pute\n\n");
 	return 0;
 }
