@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 COPY . /app
 
-RUN make
+RUN make re
 
 RUN chmod +x ft_ping
 
