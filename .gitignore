@@ -56,3 +56,6 @@ dkms.conf
 
 # executable and object files from the build process
 ft_ping
+
+# Other files to ignore
+kesako.md
