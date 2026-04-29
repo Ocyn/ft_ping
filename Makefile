@@ -36,6 +36,7 @@ OBJ_DIR				= $(SRC_DIR)OBJ/
 #			FILES
 
 ALL_SRC				= main.c \
+					ping.c \
 					utils.c
 
 ALL_HEADERS			= ping.h
