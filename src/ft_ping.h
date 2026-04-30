@@ -7,6 +7,7 @@
 # include <string.h>
 # include <netinet/ip_icmp.h>
 # include <sys/time.h>
+# include <netdb.h>
 
 // struct icmphdr;
 typedef struct	s_icmp_header
@@ -30,13 +31,24 @@ typedef struct	s_icmp_header
 	};
 }	t_icmp_header;
 
-struct timeval;
+typedef struct s_data 
+{
+	t_icmp_header	header;
+	char			*params;
+	char			*host;
+}	t_data;
+
+typedef struct hostent	t_hostent;
+typedef struct timeval	t_timeval;
 
 void lorem(char *arg); // A retirer avant rendu final
 int	process_input(int ac, char **av);
 int init_ping(char **av);
 int	return_error(char *log);
 
-unsigned long	eval_checksum(t_icmp_header header);
+int	init_packet(t_icmp_header *packet);
+int	init_socket();
+unsigned short	eval_checksum(void *header, int size);
+t_hostent	*find_hostname(char *input);
 
 #endif
