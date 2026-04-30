@@ -13,3 +13,12 @@ int	return_error(char *log)
 	write(2, "\n", 1);
 	return 1;
 }
+
+t_hostent	*find_hostname(char *input)
+{
+	t_hostent	*host;
+	host = gethostbyname(input);
+	if (!host)
+		return_error("gethostbyname failed");
+	return host;
+}
