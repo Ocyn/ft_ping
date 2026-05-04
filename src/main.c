@@ -7,9 +7,15 @@ int main(int ac, char **av)
 	(void) av;
 	
 	int socket = 0;
+	t_icmp_header	*packet;
+
+	packet = malloc(64);
+	if (!packet)
+		return_error("Packet malloc failed");
+
 	if (process_input(ac, av))
 		return 1;
-	if (init_ping(av, &socket))
+	if (init_ping(av, &socket, packet))
 		return 1;
 	
 	return 0;
@@ -26,7 +32,7 @@ int	process_input(int ac, char **av)
 	return 0;
 }
 
-int init_ping(char **av, int *socket)
+int init_ping(char **av, int *socket, t_icmp_header *packet)
 {
 	char *target = av[1];
 	printf("PING %s XX(xx) octets de données.\n", target);
@@ -36,7 +42,6 @@ int init_ping(char **av, int *socket)
 	*socket = init_socket();
 	if (*socket == -1)
 		return return_error("Init socket: ");
-	t_icmp_header *packet = malloc(64);
 	if (packet == NULL)
 		return return_error("Packet malloc: ");
 	if (init_packet(packet))
