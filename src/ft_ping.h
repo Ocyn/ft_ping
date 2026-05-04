@@ -43,7 +43,7 @@ typedef struct timeval	t_timeval;
 
 void lorem(char *arg); // A retirer avant rendu final
 int	process_input(int ac, char **av);
-int init_ping(char **av);
+int init_ping(char **av, int *socket);
 int	return_error(char *log);
 
 int	init_packet(t_icmp_header *packet);
