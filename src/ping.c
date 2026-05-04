@@ -17,9 +17,12 @@ int	init_packet(t_icmp_header *packet)
 int	init_socket()
 {
 	// Socket Raw requiere sudo to work
-	int	sock = socket(AF_INET, SOCK_RAW, IPPROTO_ICMP);
+	int	sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_ICMP);
 	if (sock == -1)
-		return return_error("Socket init failed");
+	{
+		perror("socket");
+		return -1;
+	}
 	return sock;
 }
 
