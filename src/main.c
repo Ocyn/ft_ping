@@ -6,9 +6,10 @@ int main(int ac, char **av)
 	(void) ac;
 	(void) av;
 	
+	int socket = 0;
 	if (process_input(ac, av))
 		return 1;
-	if (init_ping(av))
+	if (init_ping(av, &socket))
 		return 1;
 	
 	return 0;
@@ -25,14 +26,15 @@ int	process_input(int ac, char **av)
 	return 0;
 }
 
-int init_ping(char **av)
+int init_ping(char **av, int *socket)
 {
 	char *target = av[1];
 	printf("PING %s XX(xx) octets de données.\n", target);
 	t_hostent	*host = find_hostname(target);
 	if (!host)
 		return 1;
-	if (init_socket())
+	*socket = init_socket();
+	if (*socket == -1)
 		return return_error("Init socket: ");
 	t_icmp_header *packet = malloc(64);
 	if (packet == NULL)
