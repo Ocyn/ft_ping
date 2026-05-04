@@ -10,11 +10,13 @@ COPY . /app
 
 RUN make re
 
+RUN chown root:root ft_ping && chmod u+s ft_ping
+
 RUN chmod +x ft_ping
 
 
 RUN echo "Running ft_ping to test its functionality..." && \
-	sudo ./ft_ping google.com
+	./ft_ping google.com
 
 RUN echo "ft_ping terminated, launching ping for comparison..."
 
