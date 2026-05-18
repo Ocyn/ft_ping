@@ -1,16 +1,19 @@
 #include "ft_ping.h"
 
-int	init_packet(t_icmp_header *packet)
+int	init_packet(t_packet *packet)
 {
-	memset(packet, 0, 64);
-	packet->type = 8;
-	packet->code = 0;
-	packet->checksum = htons(0);
-	packet->echo.id = htons(getpid());
-	packet->echo.sequence = htons(1);
-	// packet->frag.mtu = 
+	t_icmp_header	*header = &packet->header;
+	memset(header, 0, 64);
+	header->type = 8;
+	header->code = 0;
+	header->checksum = htons(0);
+	header->echo.id = htons(getpid());
+	header->echo.sequence = htons(0); 
 	
-	packet->checksum = eval_checksum(packet, 64);
+	header->checksum = eval_checksum(header, 64);
+	memset(packet->payload, 0, 56);
+	strcpy(packet->payload, DATA_PAYLOAD);
+	printf("DEBUG packet paylaod = [%s]\n", packet->payload);
 	return 0;
 }
 
@@ -26,6 +29,7 @@ int	init_socket()
 	return sock;
 }
 
+// TODO, a refaire
 unsigned short	eval_checksum(void *header, int size)
 {
 	unsigned short *ptr = header;

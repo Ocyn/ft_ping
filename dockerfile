@@ -18,9 +18,9 @@ RUN chmod +x ft_ping
 RUN echo "Running ft_ping to test its functionality..." && \
 	./ft_ping google.com
 
-RUN echo "ft_ping terminated, launching ping for comparison..."
+# RUN echo "ft_ping terminated, launching ping for comparison..."
 
-CMD [ "ping", "-c", "4", "google.com" ]
+# CMD [ "ping", "-c", "4", "google.com" ]
 
-RUN echo "ft_ping and ping tests completed. You can compare the outputs above to see if ft_ping is working correctly."
+# RUN echo "ft_ping and ping tests completed. You can compare the outputs above to see if ft_ping is working correctly."
 

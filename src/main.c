@@ -7,7 +7,7 @@ int main(int ac, char **av)
 	(void) av;
 	
 	int socket = 0;
-	t_icmp_header	*packet;
+	t_packet	*packet;
 
 	packet = malloc(64);
 	if (!packet)
@@ -32,7 +32,7 @@ int	process_input(int ac, char **av)
 	return 0;
 }
 
-int init_ping(char **av, int *socket, t_icmp_header *packet)
+int init_ping(char **av, int *socket, t_packet *packet)
 {
 	char *target = av[1];
 	printf("PING %s XX(xx) octets de données.\n", target);

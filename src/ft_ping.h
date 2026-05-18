@@ -9,6 +9,8 @@
 # include <sys/time.h>
 # include <netdb.h>
 
+# define DATA_PAYLOAD "An idiot admire complexity, a genius admire simplicity"
+
 // struct icmphdr;
 typedef struct	s_icmp_header
 {
@@ -31,7 +33,13 @@ typedef struct	s_icmp_header
 	};
 }	t_icmp_header;
 
-typedef struct s_data 
+typedef struct s_packet
+{
+	t_icmp_header	header;
+	char			payload[56];
+}	t_packet;
+
+typedef struct s_data
 {
 	t_icmp_header	header;
 	char			*params;
@@ -43,10 +51,10 @@ typedef struct timeval	t_timeval;
 
 void lorem(char *arg); // A retirer avant rendu final
 int	process_input(int ac, char **av);
-int init_ping(char **av, int *socket, t_icmp_header *packet);
+int init_ping(char **av, int *socket, t_packet *packet);
 int	return_error(char *log);
 
-int	init_packet(t_icmp_header *packet);
+int	init_packet(t_packet *packet);
 int	init_socket();
 unsigned short	eval_checksum(void *header, int size);
 t_hostent	*find_hostname(char *input);
