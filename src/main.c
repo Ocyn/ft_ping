@@ -37,7 +37,7 @@ int init_ping(t_data *data)
 	if (!host)
 		return 1;
 	data->socket = init_socket();
-	if (*socket == -1)
+	if (data->socket == -1)
 		return return_error("Init socket: ");
 	if (data->packet == NULL)
 		return return_error("Packet malloc: ");
