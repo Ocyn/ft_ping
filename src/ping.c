@@ -11,7 +11,7 @@ int	init_packet(t_packet *packet)
 	header->echo.sequence = htons(0); 
 	
 	header->checksum = eval_checksum(header, 64);
-	memset(packet->payload, 0, 56);
+	memset(packet->payload, 0, sizeof(t_packet));
 	strcpy(packet->payload, DATA_PAYLOAD);
 	printf("DEBUG packet paylaod = [%s]\n", packet->payload);
 	return 0;
@@ -48,8 +48,9 @@ unsigned short	eval_checksum(void *header, int size)
 	return (unsigned short)~acc;
 }
 
-int	send_ping()
+int	send_ping(t_packet *packet)
 {
+	(void) packet;
 	return 0;
 }
 

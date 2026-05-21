@@ -3,6 +3,7 @@
 
 # include <stdio.h>
 # include <stdlib.h>
+# include <stdbool.h>
 # include <unistd.h>
 # include <string.h>
 # include <netinet/ip_icmp.h>
@@ -33,6 +34,12 @@ typedef struct	s_icmp_header
 	};
 }	t_icmp_header;
 
+typedef struct s_params
+{
+	bool	verbose;
+	bool	help;
+}	t_params;
+
 typedef struct s_packet
 {
 	t_icmp_header	header;
@@ -41,8 +48,11 @@ typedef struct s_packet
 
 typedef struct s_data
 {
-	t_icmp_header	header;
-	char			*params;
+	t_packet		packet;
+	// char			*params;
+	t_params		params;
+	int				*socket;
+	char			*target;
 	char			*host;
 }	t_data;
 
@@ -58,5 +68,7 @@ int	init_packet(t_packet *packet);
 int	init_socket();
 unsigned short	eval_checksum(void *header, int size);
 t_hostent	*find_hostname(char *input);
+
+t_params	parse_arg(char **tab);
 
 #endif

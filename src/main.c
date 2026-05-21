@@ -7,15 +7,12 @@ int main(int ac, char **av)
 	(void) av;
 	
 	int socket = 0;
-	t_packet	*packet;
-
-	packet = malloc(64);
-	if (!packet)
-		return_error("Packet malloc failed");
+	t_data	data;
 
 	if (process_input(ac, av))
-		return 1;
-	if (init_ping(av, &socket, packet))
+	return 1;
+	data.params = parse_arg(av);
+	if (init_ping(&data))
 		return 1;
 	
 	return 0;
@@ -32,19 +29,19 @@ int	process_input(int ac, char **av)
 	return 0;
 }
 
-int init_ping(char **av, int *socket, t_packet *packet)
+int init_ping(t_data *data)
 {
-	char *target = av[1];
-	printf("PING %s XX(xx) octets de données.\n", target);
-	t_hostent	*host = find_hostname(target);
+	
+	printf("PING %s XX(xx) octets de données.\n", data->target);
+	t_hostent	*host = find_hostname(data->target);
 	if (!host)
 		return 1;
-	*socket = init_socket();
+	data->socket = init_socket();
 	if (*socket == -1)
 		return return_error("Init socket: ");
-	if (packet == NULL)
+	if (data->packet == NULL)
 		return return_error("Packet malloc: ");
-	if (init_packet(packet))
+	if (init_packet(data->packet))
 		return return_error("init packet: ");
 	printf("\n\n\nPtdrr je deconne c\'est pas encore fonctionnel c\'est du placeholder.\n\n");
 	printf("\n\n\n\n\n\n\n\nFils de pute\n\n");
